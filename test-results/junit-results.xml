@@ -1,9 +1,26 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="58.703778">
-<testsuite name="tests\test-1.spec.ts" timestamp="2025-02-04T20:33:51.575Z" hostname="chromium" tests="1" failures="0" skipped="0" time="54.386" errors="0">
-<testcase name="Should allow create project using NEC" classname="tests\test-1.spec.ts" time="54.386">
+<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="75.74821899999999">
+<testsuite name="tests\test-1.spec.ts" timestamp="2025-02-05T12:58:17.598Z" hostname="chromium" tests="1" failures="0" skipped="0" time="48.471" errors="0">
+<testcase name="Should allow create project using NEC" classname="tests\test-1.spec.ts" time="48.471">
 <system-out>
-<![CDATA[
+<![CDATA[Email: svc-cptautomation@thermon.onmicrosoft.com
+Password: Fon48413
+Filling email: svc-cptautomation@thermon.onmicrosoft.com
+Texto actual: 1
+
 [[ATTACHMENT|tests-test-1-Should-allow-create-project-using-NEC-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="tests\test-2.spec.ts" timestamp="2025-02-05T12:58:17.598Z" hostname="chromium" tests="1" failures="0" skipped="0" time="69.672" errors="0">
+<testcase name="Display Overwrites on Design" classname="tests\test-2.spec.ts" time="69.672">
+<system-out>
+<![CDATA[Email: svc-cptautomation@thermon.onmicrosoft.com
+Password: Fon48413
+Filling email: svc-cptautomation@thermon.onmicrosoft.com
+Texto actual: 1
+
+[[ATTACHMENT|tests-test-2-Display-Overwrites-on-Design-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>

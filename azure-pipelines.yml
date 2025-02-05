@@ -1,0 +1,46 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Instalar Node.js'
+
+  - script: |
+      echo "USER=$(USER)" >> .env
+      echo "PASSWORD=$(PASSWORD)" >> .env
+    displayName: 'Generar archivo .env desde variables de entorno'
+    env:
+      USER: $(USER)
+      PASSWORD: $(PASSWORD)
+
+  - script: |
+      npm install
+      npx playwright install --with-deps
+    displayName: 'Instalar dependencias y Playwright'
+
+  - script: |
+      npx playwright test
+    displayName: 'Ejecutar pruebas Playwright'
+    env:
+      USER: $(USER)
+      PASSWORD: $(PASSWORD)
+
+  - task: PublishTestResults@2
+    displayName: 'Publicar resultados de pruebas'
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/test-results/junit-results.xml'
+      failTaskOnFailedTests: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publicar reportes HTML de pruebas'
+    inputs:
+      PathtoPublish: 'html-report'
+      ArtifactName: 'playwright-report'

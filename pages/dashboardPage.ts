@@ -65,7 +65,7 @@ export class DashboardPage {
       console.log('No confirmation dialog appeared.');
     }
 
-    // Hacer clic en el proyecto de la lista
+    
     await this.page.getByRole('button', { name: new RegExp(`${projectName}`, 'i') }).click();
     await this.page.waitForTimeout(2000);
 

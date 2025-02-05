@@ -4,13 +4,13 @@ dotenv.config();
 
 export default defineConfig({
   timeout: 150000,
-  workers: process.env.CI ? 2 : 8,
+  workers: process.env.CI ? 2 : 8, 
 
   use: {
     actionTimeout: 15000,
     headless: true,
     browserName: 'chromium',
-    baseURL: 'https://computrace7test.thermon-rd.com/',
+    baseURL: process.env.BASE_URL || 'https://computrace7test.thermon-rd.com/', 
     viewport: { width: 1280, height: 720 },
     screenshot: 'only-on-failure',
     trace: 'on'
