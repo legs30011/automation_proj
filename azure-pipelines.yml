@@ -4,7 +4,7 @@ trigger:
       - main
 
 pool:
-  name: 'Self-Hosted'  # Nombre del pool del self-hosted agent en Azure DevOps
+  name: 'Test_Animator_Selfhosted'  # Cambié el nombre del pool a Test_Animator_Selfhosted
 
 steps:
   - task: NodeTool@0
