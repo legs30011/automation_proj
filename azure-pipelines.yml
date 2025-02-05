@@ -4,7 +4,7 @@ trigger:
       - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Self-Hosted'  # Nombre del pool del self-hosted agent en Azure DevOps
 
 steps:
   - task: NodeTool@0
@@ -21,11 +21,8 @@ steps:
       PASSWORD: $(PASSWORD)
 
   - script: |
-      rm -rf node_modules
-      npm install
+      npm ci
       npx playwright install --with-deps
-      ls -l ./node_modules/.bin/playwright
-      sudo chmod +x ./node_modules/.bin/playwright
     displayName: 'Instalar dependencias y Playwright'
 
   - script: |
