@@ -1,0 +1,11 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="58.703778">
+<testsuite name="tests\test-1.spec.ts" timestamp="2025-02-04T20:33:51.575Z" hostname="chromium" tests="1" failures="0" skipped="0" time="54.386" errors="0">
+<testcase name="Should allow create project using NEC" classname="tests\test-1.spec.ts" time="54.386">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-test-1-Should-allow-create-project-using-NEC-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
