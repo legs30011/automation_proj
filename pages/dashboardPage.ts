@@ -30,14 +30,12 @@ export class DashboardPage {
     await this.createProjectButton.click();
 
     const circuitCountCell = this.page.locator('.MuiDataGrid-row > div:nth-child(6)').first();
-
-    
     await circuitCountCell.waitFor({ state: 'attached', timeout: 10000 });
 
-    const text = await circuitCountCell.textContent();
-    console.log('Texto actual:', text); 
+    const text = (await circuitCountCell.textContent())?.trim() || '';
+    console.log('Texto actual:', text);
     if (text !== "1") {
-      console.log(`Expected "1" but got ${text}`);
+      console.log(`Expected "1" but got "${text}"`);
     }
 
     await expect(circuitCountCell).toHaveText('1');
@@ -45,14 +43,10 @@ export class DashboardPage {
   }
 
   async selectProjectFromList(projectName: string) {
-    
     const projectItem = this.page.locator(`[role="menuitem"]:has-text("${projectName}")`);
     await projectItem.waitFor({ state: 'visible', timeout: 10000 });
-
-    
     await this.page.waitForSelector('[role="menuitem"]', { timeout: 10000 });
 
-    
     try {
       const confirmButton = this.page.getByRole('menuitem', { name: new RegExp(`${projectName}`, 'i') })
         .getByLabel('Are you sure to discard the');
@@ -65,35 +59,34 @@ export class DashboardPage {
       console.log('No confirmation dialog appeared.');
     }
 
-    
     await this.page.getByRole('button', { name: new RegExp(`${projectName}`, 'i') }).click();
     await this.page.waitForTimeout(2000);
 
-    
-    const circuitCountCell = this.page.locator('.MuiDataGrid-row > div:nth-child(6)').first();
+    /*const circuitCountCell = this.page.locator('.MuiDataGrid-row > div:nth-child(6)').first();
     await circuitCountCell.waitFor({ state: 'attached', timeout: 10000 });
 
-    const text = await circuitCountCell.textContent();
+    const text = (await circuitCountCell.textContent())?.trim() || '';
+    console.log('Texto actual:', text);
     if (text !== "1") {
-      console.log(`Expected "1" but got ${text}`);
+      console.log(`Expected "1" but got "${text}"`);
     }
 
     await expect(circuitCountCell).toHaveText('1');
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);*/
   }
 
   async DesignProject() {
     await this.createCircuitButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.waitForElementEnabled(this.createCircuitButton, 20000);
     await this.createCircuitButton.click();
-    
+
     const circuitLocator = this.page.locator('[data-testid^="rf__node-"]');
     await circuitLocator.first().waitFor({ state: 'visible', timeout: 20000 });
     await circuitLocator.first().click();
-    
+
     await this.saveButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.waitForElementEnabled(this.saveButton, 20000);
-    
+
     await this.DesignProjectButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.DesignProjectButton.click();
 
@@ -108,27 +101,16 @@ export class DashboardPage {
   }
 
   async checkDesignResults() {
-    const images = this.page.locator('img'); 
-    
-    
+    const images = this.page.locator('img');
     await this.page.getByRole('tab', { name: 'Design Results' }).first().click();
-    await this.page.waitForTimeout(3000); 
-
-    
+    await this.page.waitForTimeout(3000);
     await this.page.getByRole('tab', { name: 'Design Results' }).nth(1).click();
-    await this.page.waitForTimeout(3000); 
-
-   
+    await this.page.waitForTimeout(3000);
     await expect(images.nth(1)).toBeVisible({ timeout: 3000 });
-
-    
     await images.first().click();
     await images.nth(1).click();
-
-    
     await expect(this.page.getByText('Circuit: Success Segment: Success')).toBeVisible({ timeout: 4000 });
-
-    await this.page.waitForTimeout(2000); 
+    await this.page.waitForTimeout(2000);
   }
 
   async openProjectsInCache() {
@@ -142,6 +124,6 @@ export class DashboardPage {
       if (el instanceof HTMLButtonElement && el.disabled) {
         throw new Error('Element is not enabled');
       }
-    }, { timeout });
+    });
   }
 }

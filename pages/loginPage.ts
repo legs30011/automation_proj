@@ -22,8 +22,8 @@ export class LoginPage {
   }
 
   async navigate() {
-    await this.page.goto('https://computrace7test.thermon-rd.com/', { waitUntil: 'domcontentloaded' });
-    await this.loginButton.waitFor({ state: 'visible', timeout: 15000 }); // Wait for LOGIN button to be visible
+    await this.page.goto('https://computracedevweb.thermon.com/', { waitUntil: 'domcontentloaded' });
+    await this.loginButton.waitFor({ state: 'visible', timeout: 15000 }); 
   }
 
   async login(email: string, password: string) {
@@ -45,7 +45,6 @@ export class LoginPage {
       console.error('Email input is not visible!');
     }
 
-    // Click on the "Next" button
     await this.nextButton.click();
 
     // Wait for the password input to be visible and fill the password
