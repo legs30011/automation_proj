@@ -1,19 +1,40 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="72.18185">
-<testsuite name="tests\test-1.spec.ts" timestamp="2025-02-12T17:53:32.068Z" hostname="chromium" tests="1" failures="0" skipped="0" time="68.687" errors="0">
-<testcase name="Should allow create project using NEC" classname="tests\test-1.spec.ts" time="68.687">
+<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="98.476694">
+<testsuite name="tests\test-1.spec.ts" timestamp="2025-02-12T19:22:26.096Z" hostname="chromium" tests="1" failures="0" skipped="0" time="76.241" errors="0">
+<testcase name="Should allow create project using NEC" classname="tests\test-1.spec.ts" time="76.241">
 <system-out>
 <![CDATA[Email: svc-cptautomation@thermon.onmicrosoft.com
 Password: Cacho1029
 Filling email: svc-cptautomation@thermon.onmicrosoft.com
 Creando circuito...
 Esperando circuito en UI...
-Buscando proyecto: test-3219
+Buscando proyecto: test-844
 ⚠️ Apareció el mensaje de confirmación, haciendo clic...
 Texto actual: 1
 ✅ Circuit count is correct.
-Buscando proyecto: test-3219
+Buscando proyecto: test-844
 
 [[ATTACHMENT|tests-test-1-Should-allow-create-project-using-NEC-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="tests\test-2.spec.ts" timestamp="2025-02-12T19:22:26.096Z" hostname="chromium" tests="1" failures="0" skipped="0" time="93.423" errors="0">
+<testcase name="Display Overwrites on Design" classname="tests\test-2.spec.ts" time="93.423">
+<system-out>
+<![CDATA[Email: svc-cptautomation@thermon.onmicrosoft.com
+Password: Cacho1029
+Filling email: svc-cptautomation@thermon.onmicrosoft.com
+Creando circuito...
+Esperando circuito en UI...
+Diseñando circuito...
+Validando imágenes...
+Buscando proyecto: test-1677
+⚠️ Apareció el mensaje de confirmación, haciendo clic...
+Texto actual: 1
+✅ Circuit count is correct.
+Buscando proyecto: test-1677
+
+[[ATTACHMENT|tests-test-2-Display-Overwrites-on-Design-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>
