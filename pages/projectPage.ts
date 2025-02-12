@@ -47,11 +47,13 @@ export class ProjectPage {
   }
 
   async createCircuit() {
+    console.log('Creando circuito...');
     await this.createCircuitButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.waitForElementEnabled(this.createCircuitButton, 20000);
     await this.createCircuitButton.click();
-    await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(9000);
 
+    console.log('Esperando circuito en UI...');
     const circuitLocator = this.page.locator('[data-testid^="rf__node-"]');
     await circuitLocator.first().waitFor({ state: 'visible', timeout: 20000 });
     await circuitLocator.first().click();
@@ -59,9 +61,12 @@ export class ProjectPage {
     await this.saveButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.waitForElementEnabled(this.saveButton, 20000);
     await this.saveButton.click();
+    await this.page.waitForTimeout(7000);
   }
 
-  async openProject() {
+  async openProject(projectName: string) {
+    console.log(`Buscando proyecto: ${projectName}`);
+    await this.page.getByRole('button', { name: new RegExp(`${projectName}`, 'i') }).click();
     await this.openProjectButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.waitForElementEnabled(this.openProjectButton, 20000);
     await this.openProjectButton.click();

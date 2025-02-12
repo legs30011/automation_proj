@@ -33,27 +33,30 @@ export class DashboardPage {
   async selectProjectFromList(projectName: string) {
     console.log(`Buscando proyecto: ${projectName}`);
     const projectItem = this.page.locator(`[role="menuitem"]:has-text("${projectName}")`);
-    await projectItem.waitFor({ state: 'visible', timeout: 10000 });
-    await this.page.waitForSelector('[role="menuitem"]', { timeout: 10000 });
-
+  
+    await projectItem.waitFor({ state: 'visible', timeout: 20000 });
+    await this.page.waitForSelector('[role="menuitem"]', { timeout: 20000 });
+  
     try {
-      const confirmButton = this.page.getByRole('menuitem', { name: new RegExp(`${projectName}`, 'i') })
-        .getByLabel('Are you sure to discard the');
-
-      if (await confirmButton.isVisible()) {
+      const confirmButton = this.page.getByRole('menuitem', {
+        name: new RegExp(`${projectName} Are you sure to`, 'i'),
+      });
+  
+      if (await confirmButton.isVisible({ timeout: 5000 })) {
+        console.log('⚠️ Apareció el mensaje de confirmación, haciendo clic...');
         await confirmButton.click();
         await this.page.waitForTimeout(3000);
+      } else {
+        console.log('✅ No apareció el diálogo de confirmación, continuando...');
       }
     } catch (error) {
-      console.log('No confirmation dialog appeared.');
+      console.log('❌ Error al manejar la confirmación:', error);
     }
-
-    await this.page.getByRole('button', { name: new RegExp(`${projectName}`, 'i') }).click();
     await this.page.waitForTimeout(4000);
-
+  
     const circuitCountCell = this.page.locator('.MuiDataGrid-row > div:nth-child(6)').first();
     await circuitCountCell.waitFor({ state: 'attached', timeout: 10000 });
-
+  
     const text = (await circuitCountCell.textContent())?.trim() || '';
     console.log('Texto actual:', text);
     if (text !== "1") {
@@ -61,12 +64,13 @@ export class DashboardPage {
     } else {
       console.log('✅ Circuit count is correct.');
     }
-
+  
     await expect(circuitCountCell).toHaveText('1', { timeout: 15000 });
     await this.page.waitForTimeout(4000);
   }
+  
   async openProjectsInCache() {
-    await this.projectsInCacheButton.waitFor({ state: 'visible', timeout: 20000 });
+    await this.projectsInCacheButton.waitFor({ state: 'visible', timeout: 30000 });
     await this.projectsInCacheButton.click();
   }
 
@@ -88,6 +92,7 @@ export class DashboardPage {
     console.log('Diseñando circuito...');
     await this.DesignProjectButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.DesignProjectButton.click();
+    await this.page.waitForTimeout(15000);
 
     console.log('Validando imágenes...');
     const images = this.page.getByRole('img', { name: 'text' });

@@ -41,8 +41,8 @@ test('Display Overwrites on Design', async ({ page }) => {
   await dashboardPage.selectProjectFromList(projectName);
 
   // **Step 6: Open the project**
-  await page.getByText('Open Project').click();
-  await page.waitForTimeout(4000);
+  await projectPage.openProject(projectName);
+  await page.waitForTimeout(4000);;
 
   // **Step 7: Validate images and active circuit design**
   await dashboardPage.designActiveCircuitAndValidateImages();

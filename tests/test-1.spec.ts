@@ -43,6 +43,6 @@ test('Should allow create project using NEC', async ({ page }) => {
   await dashboardPage.selectProjectFromList(projectName);
 
   // **Step 7: Open the project**
-  await page.getByText('Open Project').click();
-  await page.waitForTimeout(2000);
+  await projectPage.openProject(projectName);
+  await page.waitForTimeout(4000);
 });
