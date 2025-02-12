@@ -4,21 +4,13 @@ trigger:
       - main
 
 pool:
-  name: 'Test_Animator_Selfhosted'  # Cambié el nombre del pool a Test_Animator_Selfhosted
+  vmImage: 'ubuntu-latest'
 
 steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '20.x'
     displayName: 'Instalar Node.js'
-
-  - script: |
-      echo "USER=$(USER)" >> .env
-      echo "PASSWORD=$(PASSWORD)" >> .env
-    displayName: 'Generar archivo .env desde variables de entorno'
-    env:
-      USER: $(USER)
-      PASSWORD: $(PASSWORD)
 
   - script: |
       npm ci
@@ -28,9 +20,6 @@ steps:
   - script: |
       npx playwright test
     displayName: 'Ejecutar pruebas Playwright'
-    env:
-      USER: $(USER)
-      PASSWORD: $(PASSWORD)
 
   - task: PublishTestResults@2
     displayName: 'Publicar resultados de pruebas'
@@ -39,8 +28,11 @@ steps:
       testResultsFiles: '**/test-results/junit-results.xml'
       failTaskOnFailedTests: true
 
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publicar reportes HTML de pruebas'
+  - task: Docker@2
+    displayName: 'Construir y subir imagen a Docker Hub'
     inputs:
-      PathtoPublish: 'html-report'
-      ArtifactName: 'playwright-report'
+      command: 'buildAndPush'
+      repository: 'legs30011/test-playwright'
+      dockerfile: 'dockerfile'
+      containerRegistry: 'docker-hub-legs30011'
+      tags: 'latest'
