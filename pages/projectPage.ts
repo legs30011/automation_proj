@@ -50,6 +50,7 @@ export class ProjectPage {
     await this.createCircuitButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.waitForElementEnabled(this.createCircuitButton, 20000);
     await this.createCircuitButton.click();
+    await this.page.waitForTimeout(5000);
 
     const circuitLocator = this.page.locator('[data-testid^="rf__node-"]');
     await circuitLocator.first().waitFor({ state: 'visible', timeout: 20000 });

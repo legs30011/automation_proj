@@ -10,7 +10,7 @@ export default defineConfig({
     actionTimeout: 15000,
     headless: true,
     browserName: 'chromium',
-    baseURL: process.env.BASE_URL || 'https://computrace7test.thermon-rd.com/', 
+    baseURL: process.env.BASE_URL || 'https://computracedevweb.thermon.com/', 
     viewport: { width: 1280, height: 720 },
     screenshot: 'only-on-failure',
     trace: 'on'

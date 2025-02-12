@@ -1,13 +1,19 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="45.600274000000006">
-<testsuite name="tests\test-1.spec.ts" timestamp="2025-02-07T15:43:18.799Z" hostname="chromium" tests="1" failures="0" skipped="0" time="42.114" errors="0">
-<testcase name="Should allow create project using NEC" classname="tests\test-1.spec.ts" time="42.114">
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="92.583271">
+<testsuite name="tests\test-2.spec.ts" timestamp="2025-02-12T15:13:09.984Z" hostname="chromium" tests="1" failures="0" skipped="0" time="88.162" errors="0">
+<testcase name="Display Overwrites on Design" classname="tests\test-2.spec.ts" time="88.162">
 <system-out>
 <![CDATA[Email: svc-cptautomation@thermon.onmicrosoft.com
 Password: Cacho1029
 Filling email: svc-cptautomation@thermon.onmicrosoft.com
+Creando circuito...
+Esperando circuito en UI...
+Diseñando circuito...
+Validando imágenes...
+Buscando proyecto: test-562
 Texto actual: 1
+✅ Circuit count is correct.
 
-[[ATTACHMENT|tests-test-1-Should-allow-create-project-using-NEC-chromium\trace.zip]]
+[[ATTACHMENT|tests-test-2-Display-Overwrites-on-Design-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>
