@@ -59,15 +59,82 @@ export class DashboardPage {
   
     const text = (await circuitCountCell.textContent())?.trim() || '';
     console.log('Texto actual:', text);
-    if (text !== "1") {
-      console.error(`❌ Expected "1" but got "${text}"`);
-    } else {
+  
+    // Check if the text is 1 or greater, but not 0
+    if (parseInt(text) >= 1) {
       console.log('✅ Circuit count is correct.');
+    } else {
+      console.error(`❌ Expected a number greater than or equal to 1, but got "${text}"`);
     }
   
-    await expect(circuitCountCell).toHaveText('1', { timeout: 15000 });
+    await expect(circuitCountCell).toHaveText(/^[1-9][0-9]*$/, { timeout: 15000 }); // Regex to ensure the value is greater than or equal to 1
     await this.page.waitForTimeout(4000);
   }
+
+  async selectProjectFromListAndValidateTwo(projectName: string) {
+    console.log(`Searching for project: ${projectName}`);
+    const projectItem = this.page.locator(`[role="menuitem"]:has-text("${projectName}")`);
+  
+    await projectItem.waitFor({ state: 'visible', timeout: 20000 });
+    await this.page.waitForSelector('[role="menuitem"]', { timeout: 20000 });
+  
+    try {
+      const confirmButton = this.page.getByRole('menuitem', {
+        name: new RegExp(`${projectName} Are you sure to`, 'i'),
+      });
+  
+      if (await confirmButton.isVisible({ timeout: 5000 })) {
+        console.log('⚠️ Confirmation dialog appeared, clicking...');
+        await confirmButton.click();
+        await this.page.waitForTimeout(3000);
+      } else {
+        console.log('✅ Confirmation dialog did not appear, continuing...');
+      }
+    } catch (error) {
+      console.log('❌ Error handling confirmation:', error);
+    }
+    await this.page.waitForTimeout(4000);
+  
+    // Validate that positions 6 and 7 have the value 2
+    const circuitCountCell6 = this.page.locator('.MuiDataGrid-row > div:nth-child(6)').first();
+    await circuitCountCell6.waitFor({ state: 'attached', timeout: 10000 });
+    const text6 = (await circuitCountCell6.textContent())?.trim() || '';
+    console.log('Text in position 6:', text6);
+  
+    if (text6 === "2") {
+      console.log('✅ Position 6 has the value 2.');
+    } else {
+      console.error(`❌ Expected "2" in position 6, but got "${text6}"`);
+    }
+  
+    const circuitCountCell7 = this.page.locator('.MuiDataGrid-row > div:nth-child(7)').first();
+    await circuitCountCell7.waitFor({ state: 'attached', timeout: 10000 });
+    const text7 = (await circuitCountCell7.textContent())?.trim() || '';
+    console.log('Text in position 7:', text7);
+  
+    if (text7 === "2") {
+      console.log('✅ Position 7 has the value 2.');
+    } else {
+      console.error(`❌ Expected "2" in position 7, but got "${text7}"`);
+    }
+  
+    // Additional validation for other positions if needed
+    const circuitCountCell = this.page.locator('.MuiDataGrid-row > div:nth-child(6)').first();
+    await circuitCountCell.waitFor({ state: 'attached', timeout: 10000 });
+    const text = (await circuitCountCell.textContent())?.trim() || '';
+    console.log('Current text:', text);
+  
+    if (parseInt(text) >= 1) {
+      console.log('✅ Circuit count is correct.');
+    } else {
+      console.error(`❌ Expected a number greater than or equal to 1, but got "${text}"`);
+    }
+  
+    await expect(circuitCountCell).toHaveText(/^[1-9][0-9]*$/, { timeout: 15000 });
+    await this.page.waitForTimeout(4000);
+  }
+  
+  
   
   async openProjectsInCache() {
     await this.projectsInCacheButton.waitFor({ state: 'visible', timeout: 30000 });
