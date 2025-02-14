@@ -1,26 +1,18 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="146.980373">
-<testsuite name="tests\test-4.spec.ts" timestamp="2025-02-13T16:50:02.336Z" hostname="chromium" tests="1" failures="0" skipped="0" time="141.485" errors="0">
-<testcase name="Display Overwrites on Design" classname="tests\test-4.spec.ts" time="141.485">
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="125.95111999999999">
+<testsuite name="tests\test-5.spec.ts" timestamp="2025-02-14T21:53:57.214Z" hostname="chromium" tests="1" failures="0" skipped="0" time="121.009" errors="0">
+<testcase name="Display Overwrites on Design" classname="tests\test-5.spec.ts" time="121.009">
 <system-out>
 <![CDATA[Email: svc-cptautomation@thermon.onmicrosoft.com
 Password: Cacho1029
 Filling email: svc-cptautomation@thermon.onmicrosoft.com
-Executing circuit actions...
-Right-clicking on Segment row header...
-Selecting "Add Splice" option...
-Right-clicking on "0001"...
-Clicking on backdrop...
-Clicking on "Design Active Circuit" button...
-Clicking on "Save" button...
-Buscando proyecto: test-538
+Número de opciones visibles: 9
+Buscando proyecto: test-336
 ⚠️ Apareció el mensaje de confirmación, haciendo clic...
 Texto actual: 1
 ✅ Circuit count is correct.
-Searching for project: test-538
-Segment 2 is visible. Clicking on Segment 2...
-Segment 1 is visible. Clicking on Segment 1...
+Buscando proyecto: test-336
 
-[[ATTACHMENT|tests-test-4-Display-Overwrites-on-Design-chromium\trace.zip]]
+[[ATTACHMENT|tests-test-5-Display-Overwrites-on-Design-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>

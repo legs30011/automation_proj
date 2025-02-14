@@ -8,7 +8,7 @@ export default defineConfig({
 
   use: {
     actionTimeout: 15000,
-    headless: true,
+    headless: false,
     browserName: 'chromium',
     baseURL: process.env.BASE_URL || 'https://computracedevweb.thermon.com/', 
     viewport: { width: 1280, height: 720 },

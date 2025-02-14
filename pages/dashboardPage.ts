@@ -59,15 +59,13 @@ export class DashboardPage {
   
     const text = (await circuitCountCell.textContent())?.trim() || '';
     console.log('Texto actual:', text);
-  
-    // Check if the text is 1 or greater, but not 0
     if (parseInt(text) >= 1) {
       console.log('✅ Circuit count is correct.');
     } else {
       console.error(`❌ Expected a number greater than or equal to 1, but got "${text}"`);
     }
   
-    await expect(circuitCountCell).toHaveText(/^[1-9][0-9]*$/, { timeout: 15000 }); // Regex to ensure the value is greater than or equal to 1
+    await expect(circuitCountCell).toHaveText(/^[1-9][0-9]*$/, { timeout: 15000 }); 
     await this.page.waitForTimeout(4000);
   }
 
@@ -159,7 +157,7 @@ export class DashboardPage {
     console.log('Diseñando circuito...');
     await this.DesignProjectButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.DesignProjectButton.click();
-    await this.page.waitForTimeout(15000);
+    await this.page.waitForTimeout(20000);
 
     console.log('Validando imágenes...');
     const images = this.page.getByRole('img', { name: 'text' });

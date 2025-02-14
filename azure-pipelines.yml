@@ -29,6 +29,7 @@ steps:
       failTaskOnFailedTests: true
 
   - task: Docker@2
+<<<<<<< HEAD
     displayName: 'Construir imagen Docker'
     inputs:
       command: 'build'
@@ -44,3 +45,12 @@ steps:
       repository: 'legs30011/test-playwright'
       containerRegistry: 'docker-hub-legs30011'
       tags: 'latest'
+=======
+    displayName: 'Construir y subir imagen a Docker Hub'
+    inputs:
+      command: 'buildAndPush'
+      repository: 'legs30011/test-playwright'
+      dockerfile: 'dockerfile'
+      containerRegistry: 'docker-hub-legs30011'
+      tags: 'latest'
+>>>>>>> bfd021672d0f9135ff584a9210980f568877eebf

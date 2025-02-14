@@ -10,8 +10,9 @@ export class ProjectPage {
   private createCircuitButton: Locator;
   private saveButton: Locator;
   private openProjectButton: Locator;
-  private designActiveCircuitButton: Locator; // Nuevo
-  private images: Locator; // Nuevo
+  private designActiveCircuitButton: Locator; 
+  private images: Locator; 
+  private DesignProjectButton: Locator; 
 
   constructor(page: Page) {
     this.page = page;
@@ -24,7 +25,9 @@ export class ProjectPage {
     this.saveButton = page.getByLabel('Save').getByRole('button');
     this.openProjectButton = page.getByText('Open Project');
     this.designActiveCircuitButton = page.getByLabel('Design Active Circuit').getByRole('button');  // Nuevo
-    this.images = page.getByRole('img', { name: 'text' }); // Nuevo
+    this.images = page.getByRole('img', { name: 'text' }); 
+    this.DesignProjectButton = page.getByLabel('Design Active Circuit').getByRole('button');
+
   }
 
   async fillProjectDetails(name: string, number: string, date: string) {
@@ -39,6 +42,24 @@ export class ProjectPage {
       await this.waitForElementEnabled(this.nextButton, 20000);
       await this.nextButton.click();
       await this.page.waitForTimeout(2000);
+    }
+
+    await this.finishButton.waitFor({ state: 'visible', timeout: 20000 });
+    await this.waitForElementEnabled(this.finishButton, 20000);
+    await this.finishButton.click();
+  }
+
+  async completeProjectCreationtest5() {
+    for (let i = 0; i < 3; i++) {
+      await this.nextButton.waitFor({ state: 'visible', timeout: 20000 });
+      await this.waitForElementEnabled(this.nextButton, 20000);
+      await this.nextButton.click();
+      await this.page.waitForTimeout(2000);
+      
+      if (i === 0) {
+        await this.page.getByRole('combobox', { name: 'NEC: Ordinary/Divisions' }).click();
+        await this.page.getByRole('option', { name: 'IECEx: Ordinary/Zones' }).click();
+      }
     }
 
     await this.finishButton.waitFor({ state: 'visible', timeout: 20000 });
@@ -251,6 +272,34 @@ export class ProjectPage {
     await this.page.getByLabel('Save').getByRole('button').click();
     await this.page.waitForTimeout(20000); // Kept the same
   }  
+
+  async countAndSaveCircuits() {
+    await this.createCircuitButton.waitFor({ state: 'visible', timeout: 30000 }); 
+    await this.waitForElementEnabled(this.createCircuitButton, 30000); 
+    await this.createCircuitButton.click();
+    await this.page.waitForTimeout(20000);
+    const circuitLocator = this.page.locator('[data-testid^="rf__node-"]');
+    await circuitLocator.first().waitFor({ state: 'visible', timeout: 20000 });
+    await circuitLocator.first().click(); 
+    await this.page.waitForTimeout(20000);
+    await this.DesignProjectButton.waitFor({ state: 'visible', timeout: 20000 });
+    await this.page.getByLabel('Design Active Circuit').getByRole('button').click();
+    await this.DesignProjectButton.click();
+    await this.page.waitForTimeout(20000);
+    await this.page.getByRole('tab', { name: 'Design Results' }).first().click();
+    await this.page.waitForTimeout(3000);
+    await this.page.getByRole('checkbox', { name: 'Override' }).first().check();
+    const checkbox = this.page.getByRole('checkbox', { name: 'Override' }).first();
+    await checkbox.waitFor({ state: 'visible', timeout: 5000 });
+    await checkbox.check();
+    await this.page.getByText('ZP-XP').click();
+    const dropdown = this.page.getByText('ZP-XPJB-K/XP Plus-SX-120-');
+    await dropdown.waitFor({ state: 'visible', timeout: 5000 });
+    const optionsCount = await this.page.locator('role=option').count();
+    console.log(`Número de opciones visibles: ${optionsCount}`);
+    await this.page.keyboard.press('Escape');
+    await this.page.getByLabel('Save').getByRole('button').click();
+  }
 
   // para diseñar y validar imágenes
   async designActiveCircuitAndValidateImages() {
