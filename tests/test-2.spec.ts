@@ -37,7 +37,7 @@ test('Display Overwrites on Design', async ({ page }) => {
   // **Step 5: Create circuit and design**
   await dashboardPage.DesignProject();
   await dashboardPage.navigateToDashboard();
-  await dashboardPage.openProjectsInCache();
+  await dashboardPage.openProjectsInCache(projectName);
   await dashboardPage.selectProjectFromList(projectName);
 
   // **Step 6: Open the project**

@@ -33,7 +33,7 @@ test('Display Overwrites on Design', async ({ page }) => {
 
   await projectPage.countAndSaveCircuits();
   await dashboardPage.navigateToDashboard();
-  await dashboardPage.openProjectsInCache();
+  await dashboardPage.openProjectsInCache(projectName);
   await dashboardPage.selectProjectFromList(projectName);
 
   // **Step 6: Open the project**

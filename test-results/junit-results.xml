@@ -1,20 +1,65 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="125.95111999999999">
-<testsuite name="tests\test-5.spec.ts" timestamp="2025-02-14T21:53:57.214Z" hostname="chromium" tests="1" failures="0" skipped="0" time="121.009" errors="0">
-<testcase name="Display Overwrites on Design" classname="tests\test-5.spec.ts" time="121.009">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="123.748762">
+<testsuite name="tests\test-6.spec.ts" timestamp="2025-02-15T15:30:52.737Z" hostname="chromium" tests="1" failures="1" skipped="0" time="113.117" errors="0">
+<testcase name="Should allow create project using NEC" classname="tests\test-6.spec.ts" time="113.117">
+<failure message="test-6.spec.ts:10:5 Should allow create project using NEC" type="FAILURE">
+<![CDATA[  [chromium] › tests\test-6.spec.ts:10:5 › Should allow create project using NEC ───────────────────
+
+    Error: Timed out 15000ms waiting for expect(locator).toHaveText(expected)
+
+    Locator: locator('.MuiDataGrid-row > div:nth-child(6)').first()
+    Expected pattern: /^[1-9][0-9]*$/
+    Received string:  "0"
+    Call log:
+      - expect.toHaveText with timeout 15000ms
+      - waiting for locator('.MuiDataGrid-row > div:nth-child(6)').first()
+        18 × locator resolved to <div title="0" tabindex="-1" role="gridcell" aria-colspan="1" aria-rowspan="1" data-colindex="4" aria-colindex="5" data-field="totalCircuits" class="MuiDataGrid-cell MuiDataGrid-cell--textRight">0</div>
+           - unexpected value "0"
+
+
+       at pages\dashboardPage.ts:68
+
+      66 |     }
+      67 |   
+    > 68 |     await expect(circuitCountCell).toHaveText(/^[1-9][0-9]*$/, { timeout: 15000 }); 
+         |                                    ^
+      69 |     await this.page.waitForTimeout(4000);
+      70 |   }
+      71 |
+        at DashboardPage.selectProjectFromList (E:\TrabajoCarlos\automation_proj\pages\dashboardPage.ts:68:36)
+        at E:\TrabajoCarlos\automation_proj\tests\test-6.spec.ts:42:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\tests-test-6-Should-allow-create-project-using-NEC-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\tests-test-6-Should-allow-create-project-using-NEC-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\tests-test-6-Should-allow-create-project-using-NEC-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
 <system-out>
 <![CDATA[Email: svc-cptautomation@thermon.onmicrosoft.com
 Password: Cacho1029
 Filling email: svc-cptautomation@thermon.onmicrosoft.com
-Número de opciones visibles: 9
-Buscando proyecto: test-336
+Creando circuito...
+Esperando circuito en UI...
+Buscando proyecto: test-1203
 ⚠️ Apareció el mensaje de confirmación, haciendo clic...
-Texto actual: 1
-✅ Circuit count is correct.
-Buscando proyecto: test-336
+Texto actual: 0
 
-[[ATTACHMENT|tests-test-5-Display-Overwrites-on-Design-chromium\trace.zip]]
+[[ATTACHMENT|tests-test-6-Should-allow-create-project-using-NEC-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|tests-test-6-Should-allow-create-project-using-NEC-chromium\trace.zip]]
 ]]>
 </system-out>
+<system-err>
+<![CDATA[❌ Expected a number greater than or equal to 1, but got "0"
+]]>
+</system-err>
 </testcase>
 </testsuite>
 </testsuites>

@@ -39,7 +39,7 @@ test('Should allow create project using NEC', async ({ page }) => {
 
   // **Step 6: Validate project creation**
   await dashboardPage.navigateToDashboard();
-  await dashboardPage.openProjectsInCache();
+  await dashboardPage.openProjectsInCache(projectName);
   await dashboardPage.selectProjectFromList(projectName);
 
   // **Step 7: Open the project**

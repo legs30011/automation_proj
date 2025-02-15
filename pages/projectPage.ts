@@ -67,6 +67,52 @@ export class ProjectPage {
     await this.finishButton.click();
   }
 
+  async fillReferenceAndEquipmentData() {
+    await this.page.waitForTimeout(2000);
+    await this.page.getByRole('tab', { name: 'Ref. Dwg.' }).click();
+    await this.page.waitForTimeout(500); 
+
+    // Add new reference drawing
+    await this.page.getByLabel('Add').getByRole('button').click();
+    await this.page.waitForSelector('text=Import Reference Drawing Type'); // Ensure dropdown is available
+    await this.page.getByRole('combobox', { name: 'Import Reference Drawing Type' }).click();
+    await this.page.getByRole('option', { name: 'Reference' }).click();
+    
+    // Fill reference drawing fields
+    await this.page.getByRole('textbox', { name: 'Number' }).fill('12');
+    await this.page.getByRole('textbox', { name: 'Received' }).fill('12/12/5');
+    await this.page.getByRole('textbox', { name: 'Revision' }).fill('wendy');
+    
+    // Confirm action
+    await this.page.waitForSelector('[data-testid="confirmHandler"]'); 
+    await this.page.getByTestId('confirmHandler').click();
+
+    // Navigate to 'Equip. Coord.' tab
+    await this.page.getByRole('tab', { name: 'Equip. Coord.' }).click();
+    await this.page.waitForTimeout(2000); 
+
+    // Add new equipment coordinates
+    await this.page.getByLabel('Add').getByRole('button').click();
+    await this.page.waitForSelector('text=Equipment Coordinates Type ​'); 
+    await this.page.getByRole('combobox', { name: 'Equipment Coordinates Type ​' }).click();
+    await this.page.getByRole('option', { name: 'Power', exact: true }).click();
+    
+    // Fill equipment coordinate fields
+    await this.page.getByRole('textbox', { name: 'Heater Number' }).fill('2');
+    await this.page.getByRole('textbox', { name: 'East' }).fill('4524');
+    await this.page.getByRole('textbox', { name: 'North' }).fill('524');
+    await this.page.getByRole('textbox', { name: 'Elevation' }).fill('52');
+    await this.page.getByRole('textbox', { name: 'Tag' }).fill('latest');
+    await this.page.waitForSelector('[data-testid="confirmHandler"]'); 
+    await this.page.getByTestId('confirmHandler').click();
+
+    await this.saveButton.waitFor({ state: 'visible', timeout: 20000 });
+    await this.waitForElementEnabled(this.saveButton, 20000);
+    await this.saveButton.click();
+    await this.page.waitForTimeout(20000);
+}
+
+
   async createCircuit() {
     console.log('Creando circuito...');
     await this.createCircuitButton.waitFor({ state: 'visible', timeout: 20000 });
@@ -82,6 +128,19 @@ export class ProjectPage {
     await this.saveButton.waitFor({ state: 'visible', timeout: 20000 });
     await this.waitForElementEnabled(this.saveButton, 20000);
     await this.saveButton.click();
+    await this.page.waitForTimeout(7000);
+  }
+  async createCircuit2() {
+    console.log('Creando circuito...');
+    await this.createCircuitButton.waitFor({ state: 'visible', timeout: 20000 });
+    await this.waitForElementEnabled(this.createCircuitButton, 20000);
+    await this.createCircuitButton.click();
+    await this.page.waitForTimeout(20000);
+
+    console.log('Esperando circuito en UI...');
+    const circuitLocator = this.page.locator('[data-testid^="rf__node-"]');
+    await circuitLocator.first().waitFor({ state: 'visible', timeout: 30000 });
+    await circuitLocator.first().click();
     await this.page.waitForTimeout(7000);
   }
 
@@ -154,6 +213,29 @@ export class ProjectPage {
       console.log('Segment 1 is not visible.');
     }
   }
+
+  async readProjectData() {
+    // Navigate to 'Ref. Dwg.' tab
+    await this.page.getByRole('tab', { name: 'Ref. Dwg.' }).click();
+    await this.page.waitForSelector('role=gridcell'); // Ensure data is available
+
+    // Get all gridcell data from 'Ref. Dwg.'
+    const refData = await this.page.locator('role=gridcell').allInnerTexts();
+    
+    // Navigate to 'Equip. Coord.' tab
+    await this.page.getByRole('tab', { name: 'Equip. Coord.' }).click();
+    await this.page.waitForSelector('role=gridcell'); // Ensure data is available
+
+    // Get all gridcell data from 'Equip. Coord.'
+    const equipData = await this.page.locator('role=gridcell').allInnerTexts();
+
+    // Log the data
+    console.log(`Ref. Dwg. Data:`, refData);
+    console.log(`Equip. Coord. Data:`, equipData);
+
+    // Return data for further processing
+    return { refData, equipData };
+}
   
 
   async executeCircuitActions() {

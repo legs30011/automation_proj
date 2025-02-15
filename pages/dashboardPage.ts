@@ -134,9 +134,18 @@ export class DashboardPage {
   
   
   
-  async openProjectsInCache() {
-    await this.projectsInCacheButton.waitFor({ state: 'visible', timeout: 30000 });
-    await this.projectsInCacheButton.click();
+  async openProjectsInCache(projectName:string) {
+    await this.page.getByRole('button', { name: 'Projects in Cache' }).waitFor({ state: 'visible', timeout: 30000 });
+    await this.page.getByRole('button', { name: 'Projects in Cache' }).click();
+
+    // Esperar que aparezca el menú con los proyectos y seleccionar el indicado
+    const projectSelector = await this.page.getByRole('menuitem', { name: projectName });
+    await projectSelector.waitFor({ state: 'visible', timeout: 10000 });
+
+    // Esperar y hacer clic en la opción de descarte del proyecto
+    const discardButton = await projectSelector.getByLabel('Are you sure to discard the');
+    await discardButton.waitFor({ state: 'visible', timeout: 5000 });
+    await discardButton.click();
   }
 
   async DesignProject() {
